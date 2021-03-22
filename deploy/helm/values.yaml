@@ -1,0 +1,23 @@
+dapr_dashboard:
+  runAsNonRoot: false
+  logLevel: DEBUG
+  serviceType: NodePort  # Allows retrieving the dashboard url by running the command "minikube service list"
+  image:
+    registry: registry.cn-hangzhou.aliyuncs.com/morse_dapr
+    name: dashboard
+    tag: 0.6.0
+dapr_placement:
+  runAsNonRoot: false
+  logLevel: DEBUG
+dapr_operator:
+  runAsNonRoot: false
+  logLevel: DEBUG
+dapr_sentry:
+  runAsNonRoot: false
+  logLevel: DEBUG
+dapr_sidecar_injector:
+  runAsNonRoot: false
+  logLevel: DEBUG
+global:
+  logAsJson: true
+  registry: registry.cn-hangzhou.aliyuncs.com/morse_dapr
