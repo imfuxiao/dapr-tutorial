@@ -28,3 +28,22 @@ app-pong:
 		--log-level debug \
  		go run ./cmd/pong/main.go
 
+.PHONY: app-client
+app-client:
+	dapr run --app-id app-client \
+		-d $${PWD}/deploy/config \
+		--log-level debug \
+ 		go run ./cmd/client/main.go
+
+APIROOTS=github.com/imfuxiao/dapr-tutorial/pkg/id-server/v1
+current_dir := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
+.PHONY: protobuf
+protobuf:
+	go-to-protobuf \
+	--only-idl=true \
+	--apimachinery-packages="" \
+	--proto-import="${current_dir}pkg/id-server" \
+	--packages="${APIROOTS}" \
+	--go-header-file "${current_dir}hack/boilerplate.go.txt" \
+	--keep-gogoproto=true \
+#	--output-base="${current_dir}"
